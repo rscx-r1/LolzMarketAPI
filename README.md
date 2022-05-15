@@ -66,7 +66,7 @@ response = LolzMarketAPI.List(**args);
 response = LolzMarketAPI.Items(**args);
 ```
 #### arguments
-`int category` | `Optional` // The category id to view specified items with that category
+`int category_id` | `Optional` // The category id to view specified items with that category
 
 `int pmin` | `Optional` // Minimal price of account (Inclusive)
 
@@ -83,7 +83,7 @@ response = LolzMarketAPI.Items(**args);
 response = LolzMarketAPI.Orders(**args);
 ```
 #### arguments
-`int category` | `Optional` // The category id to view specified items with that category
+`int category_id` | `Optional` // The category id to view specified items with that category
 
 `int pmin` | `Optional` // Minimal price of account (Inclusive)
 
