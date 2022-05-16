@@ -20,6 +20,11 @@
 * `22` `discord` - Discord
 
 ## First step to working with that API.
+Firstly we need to make a reference for our API.
+![image](https://user-images.githubusercontent.com/53280415/168472392-bd1ff28d-763e-4738-9dd2-6a017f21e519.png)
+![image](https://user-images.githubusercontent.com/53280415/168472474-7fedaf98-7e13-4fc7-adf0-17c7b1e0a501.png)
+
+Include a namespace for API.
 ```c#
 using LolzMarketAPI;
 ```
@@ -42,16 +47,16 @@ All of the functions returns an string formatted JSON object.
 ```c#
 response = LolzMarketAPI.List(**args);
 ```
-### arguments
-string category | Optional // The category name to view specified items with that category
+#### arguments
+`string category` | `Optional` // The category name to view specified items with that category
 
-int pmin | Optional // Minimal price of account (Inclusive)
+`int pmin` | `Optional` // Minimal price of account (Inclusive)
 
-int pmax | Optional // Maximum price of account (Inclusive)
+`int pmax` | `Optional` // Maximum price of account (Inclusive)
 
-string title | Optional // The word or words contained in the account title
+`string title` | `Optional` // The word or words contained in the account title
 
-bool parse_sticky_items | Optional // If yes, API will return stickied accounts in results
+`bool parse_sticky_items` | `Optional` // If yes, API will return stickied accounts in results
 
 
 > This function displays a list of latest accounts if category is not introduced or displays a list of accounts in a specific category according to your parameters with category introduced.
@@ -60,16 +65,16 @@ bool parse_sticky_items | Optional // If yes, API will return stickied accounts 
 ```c#
 response = LolzMarketAPI.Items(**args);
 ```
-### arguments
-int category | Optional // The category id to view specified items with that category
+#### arguments
+`int category_id` | `Optional` // The category id to view specified items with that category
 
-int pmin | Optional // Minimal price of account (Inclusive)
+`int pmin` | `Optional` // Minimal price of account (Inclusive)
 
-int pmax | Optional // Maximum price of account (Inclusive)
+`int pmax` | `Optional` // Maximum price of account (Inclusive)
 
-string title | Optional // The word or words contained in the account title
+`string title` | `Optional` // The word or words contained in the account title
 
-bool parse_sticky_items | Optional // If yes, API will return stickied accounts in results
+`bool parse_sticky_items` | `Optional` // If yes, API will return stickied accounts in results
 
 > This function displays a list of owned accounts
 
@@ -77,16 +82,16 @@ bool parse_sticky_items | Optional // If yes, API will return stickied accounts 
 ```c#
 response = LolzMarketAPI.Orders(**args);
 ```
-### arguments
-int category | Optional // The category id to view specified items with that category
+#### arguments
+`int category_id` | `Optional` // The category id to view specified items with that category
 
-int pmin | Optional // Minimal price of account (Inclusive)
+`int pmin` | `Optional` // Minimal price of account (Inclusive)
 
-int pmax | Optional // Maximum price of account (Inclusive)
+`int pmax` | `Optional` // Maximum price of account (Inclusive)
 
-string title | Optional // The word or words contained in the account title
+`string title` | `Optional` // The word or words contained in the account title
 
-bool parse_sticky_items | Optional // If yes, API will return stickied accounts in results
+`bool parse_sticky_items` | `Optional` // If yes, API will return stickied accounts in results
 
 > This function displays a list of purchased accounts
 
@@ -139,24 +144,24 @@ response = LolzMarketAPI.Confirm_Buy(int itemId);
 ```c#
 response = LolzMarketAPI.Transfer_Money(**args);
 ```
-### arguments
-int receiverId | (required) User id of receiver. If user_id specified, username is not required.
+#### arguments
+`int receiverId` | `Required` User id of receiver. If user_id specified, username is not required.
 
-string receiverUsername | (required) Username of receiver. If username specified, user_id is not required.
+`string receiverUsername` | `Required` Username of receiver. If username specified, user_id is not required.
 
-int amount | (required) Amount to send in your currency.
+`int amount` | `Required` Amount to send in your currency.
 
-string secret_answer |  secret_answer (required) Secret answer of your account
+`string secret_answer` |  secret_answer `Required` Secret answer of your account
 
-string currency | (required) Using currency for amount. Allowed values: cny usd rub eur uah kzt byn gbp
+`string currency` | `Required` Using currency for amount. Allowed values: cny usd rub eur uah kzt byn gbp
 
-string comment | (optional) Transfer comment. Maximum 255 characters
+`string comment` | `Optional` Transfer comment. Maximum 255 characters
 
-bool transfer_hold | (optional) (Boolean) Hold transfer or not.
+`bool transfer_hold` | `Optional` Hold transfer or not.
 
-int hold_length_value | (optional) Hold length value (number).
+`int hold_length_value` | `Optional` Hold length value (number).
 
-string hold_length_option | (optional) Hold length option (string). Allowed values: hour day week month year
+`string hold_length_option` | `Optional` Hold length option (string). Allowed values: hour day week month year
 
 ## Hold parameters examples
 E.g. you want to hold money transfer on 3 days. hold_length_value - will be '3', hold_length_option - will be 'days'.
@@ -168,28 +173,28 @@ E.g. you want to hold money transfer on 12 hours. hold_length_value - will be '1
 ```c#
 response = LolzMarketAPI.Payments(int userId, **args);
 ```
-### arguments
-int userId | Your user id to see information
+#### arguments
+`int userId` | Your user id to see information
 
-string type | (optional): Type of operation. Allowed operation types: income cost refilled_balance withdrawal_balance paid_item sold_item money_transfer receiving_money internal_purchase claim_hold
+`string type` | `Optional`: Type of operation. Allowed operation types: income cost refilled_balance withdrawal_balance paid_item sold_item money_transfer receiving_money internal_purchase claim_hold
 
-int pmin | (optional): Minimal price of operation (Inclusive)
+`int pmin` | `Optional`: Minimal price of operation (Inclusive)
 
-int pmax | (optional): Maximum price of operation (Inclusive)
+`int pmax` | `Optional`: Maximum price of operation (Inclusive)
 
-string receiver | (optional): Username of user, which receive money from you
+`string receiver` | `Optional`: Username of user, which receive money from you
 
-string sender | (optional): Username of user, which sent money to you
+`string sender` | `Optional`: Username of user, which sent money to you
 
-string startDate | (optional): Start date of operation (RFC 3339 date format)
+`string startDate` | `Optional`: Start date of operation (RFC 3339 date format)
 
-string endDate | (optional): End date of operation (RFC 3339 date format)
+`string endDate` | `Optional`: End date of operation (RFC 3339 date format)
 
-string wallet | (optional): Wallet, which used for money payots
+`string wallet` | `Optional`: Wallet, which used for money payots
 
-string comment | (optional): Comment for money transfers
+`string comment` | `Optional`: Comment for money transfers
 
-int is_hold | (optional): Display hold operations
+`int is_hold` | `Optional`: Display hold operations
 
 > This function displays list of your payments
 
@@ -200,34 +205,34 @@ For categories, which required temporary email (Steam, Social Club) you need to 
 ```c#
 response = LolzMarketAPI.Add_Item(**args);
 ```
-### arguments
-string title | (required) Russian title of account. If title specified and title_en is empty, title_en will be automatically translated to English language.
+#### arguments
+`string title` | `Required` Russian title of account. If title specified and title_en is empty, title_en will be automatically translated to English language.
 
-int price | (required) Account price in your currency
+`int price` | `Required` Account price in your currency
 
-int category_id | (required) Category id
+`int category_id` | `Required` Category id
 
-string item_origin | (required) Item origin
+`string item_origin` | `Required` Item origin
 
-int extended_guarantee |  (required) Guarantee type. Allowed values: -1 = 12 hours, 0 = 24 hours, 1 = 3 days.
+`int extended_guarantee` | `Required` Guarantee type. Allowed values: -1 = 12 hours, 0 = 24 hours, 1 = 3 days.
 
-string currency | (required) Using currency. Allowed values: cny usd rub eur uah kzt byn gbp
+`string currency` | `Required` Using currency. Allowed values: cny usd rub eur uah kzt byn gbp
 
-string title_en | (optional) English title of account. If title_en specified and title is empty, title will be automatically translated to Russian language.
+`string title_en` | `Optional` English title of account. If title_en specified and title is empty, title will be automatically translated to Russian language.
 
-string description | (optional) Account public description
+`string description` | `Optional` Account public description
 
-string information | (optional) Account private information (visible for buyer only if purchased)
+`string information` | `Optional` Account private information (visible for buyer only if purchased)
 
-bool? has_email_login_data | Required if a category is one of list of Required email login data categories (see below)
+`bool? has_email_login_data` | `Optional` / Required if a category is one of list of Required email login data categories (see below)
 
-string email_login_data | Required_ if a category is one of list of Required email login data categories (see below) . Email login data (login:pass format)
+`string email_login_data` | `Optional` / Required_ if a category is one of list of Required email login data categories (see below) . Email login data (login:pass format)
 
-string email_type | (optional) Email type. Allowed values: native autoreg
+`string email_type` | `Optional` Email type. Allowed values: native autoreg
 
-bool? allow_ask_discount | (optional) Allow users to ask discount for this account
+`bool? allow_ask_discount` | `Optional` Allow users to ask discount for this account
 
-int proxy_id | (optional) Using proxy id for account checking. See Proxy Settings to get or edit proxy list
+`int proxy_id` | `Optional` Using proxy id for account checking. See Proxy Settings to get or edit proxy list
 
 > This function adds account on the market. After this request an account will have item_state = awaiting (not displayed in search)
 ### Item origin
@@ -242,18 +247,18 @@ Account origin. Where did you get it from.
 * `retrive` - Account is recovered by email or phone (only for VKontakte category)
 
 Required email login data categories
-* Fortnite `(id 9)`
-* Epic games `(id 12)`
-* Escape from Tarkov `(id 18)`
+* `Fortnite` `(id 9)`
+* `Epic games` `(id 12)`
+* `Escape from Tarkov` `(id 18)`
 
 ## Goods_Add
 ```c#
 response = LolzMarketAPI.Goods_Add(int itemId, **args);
 ```
-### arguments
-int itemId | Item id to add
+#### arguments
+`int itemId` | `Required` Item id to add
 
-resell_item_id | (optional) Put item id, if you are trying to resell item. This is useful to pass temporary email from reselling item to new item. You will get same temporary email from reselling account.
+`int resell_item_id` | `Optional` Put item id, if you are trying to resell item. This is useful to pass temporary email from reselling item to new item. You will get same temporary email from reselling account.
 
 > This function get info about not published item. For categories, which required temporary email (Steam, Social Club), you will get temporary email in response.
 
@@ -261,20 +266,20 @@ resell_item_id | (optional) Put item id, if you are trying to resell item. This 
 ```c#
 response = LolzMarketAPI.Goods_Check(int itemId, **args);
 ```
-### arguments
-int itemId | Item id to add
+#### arguments
+`int itemId` | `Required Item id to add
 
-string login | (optional) Account login (or email)
+`string login` | `Optional` Account login (or email)
 
-string password | (optional) Account password
+`string password` | `Optional` Account password
 
-string login_password | (optional) Account login data format login:password
+`string login_password` | `Optional` Account login data format login:password
 
-bool? close_item | (optional) If set, the item will be closed item_state = closed
+`bool? close_item` | `Optional` If set, the item will be closed item_state = closed
 
-Dictionary<string, string> extra | (optional) (Array) Extra params for account checking. E.g. you need to put cookies to extra[cookies] if you want to upload Fortnite/Epic Games account {"title": "value", "title2": "value2"}
+`Dictionary<string, string> extra` | `Optional` (Array) Extra params for account checking. E.g. you need to put cookies to extra[cookies] if you want to upload Fortnite/Epic Games account {"title": "value", "title2": "value2"}
 
-int resell_item_id | Put if you are trying to resell an account.
+`int resell_item_id` | Put if you are trying to resell an account.
 
 > This function check account on validity. If account is valid, account will be published on the market.
 
@@ -283,8 +288,8 @@ int resell_item_id | Put if you are trying to resell an account.
 ```c#
 response = LolzMarketAPI.Category(**args);
 ```
-### arguments
-bool? top_queries | (optional) (Boolean) Display top queries for per category
+#### arguments
+`bool? top_queries` | `Optional` (Boolean) Display top queries for per category
 
 > This function display category list
 
@@ -293,8 +298,8 @@ bool? top_queries | (optional) (Boolean) Display top queries for per category
 ```c#
 response = LolzMarketAPI.Email_Code(string email);
 ```
-### arguments
-string email | (required) Account email
+#### arguments
+`string email` | `Required` Account email
 
 > This function gets confirmation code or link.
 
@@ -302,8 +307,8 @@ string email | (required) Account email
 ```c#
 response = LolzMarketAPI.Refuse_Guarantee(int itemId);
 ```
-### arguments
-int itemId | itemId for refusing
+#### arguments
+`int itemId` | `Required` itemId for refusing
 
 > This function cancel guarantee of account. It can be useful for account reselling.
 
@@ -311,10 +316,10 @@ int itemId | itemId for refusing
 ```c#
 response = LolzMarketAPI.Change_Password(int itemId, **args);
 ```
-### arguments
-int itemId | itemId to change password
+#### arguments
+`int itemId` | `Required` itemId to change password
 
-bool? _cancel | (optional) Cancel change password recommendation. It will be helpful, if you don't want to change password and get login data
+`bool? _cancel` | `Optional` Cancel change password recommendation. It will be helpful, if you don't want to change password and get login data
 
 > This function changes password of account.
 
@@ -322,39 +327,39 @@ bool? _cancel | (optional) Cancel change password recommendation. It will be hel
 ```c#
 response = LolzMarketAPI.Edit_Item(int itemId, **args);
 ```
-### arguments
-int itemId | itemId to edit
+#### arguments
+`int itemId` | `Required` itemId to edit
 
-string key | (optional) Key to edit (key list you can see below). E.g. price.
+`string key` | `Optional` Key to edit (key list you can see below). E.g. price.
 
-string value | (optional) Value to edit
+`string value` | `Optional` Value to edit
 
-Dictionary<string, string> key_values | (optional) Key-values to edit (Array). E.g. {"title": "value", "title2": "value2"}
+`Dictionary<string, string> key_values` | `Optional` Key-values to edit (Array). E.g. {"title": "value", "title2": "value2"}
 
-string currency = "rub" | (required) Currency of account price. Required if you are trying to change price field. Allowed values: cny usd rub eur uah kzt byn gbp | Defaults to "rub"
+`string currency = "rub"` | `Required` Currency of account price. Required if you are trying to change price field. Allowed values: cny usd rub eur uah kzt byn gbp | Defaults to "rub"
 
 ### Key list
- * `title` (_optional_) Russian title of account. If `title` specified and `title_en` is empty, `title_en` will be automatically translated to English language.
- * `title_en` (_optional_) English title of account. If `title_en` specified and `title` is empty, `title` will be automatically translated to Russian language.
- * `price` (_optional_) Account price in your currency. Allowed values: `cny` `usd` `rub` `eur` `uah` `kzt` `byn` `gbp`
- * `item_origin` (_optional_) Item origin
- * `description` (_optional_) Account public description
- * `information` (_optional_) Account private information (visible for buyer only if purchased)
- * `has_email_login_data` (_optional_) Set boolean, if you have email login data
- * `email_login_data` (_optional_) Email login data (login:pass format) 
- * `email_type` (_optional_) Email type. Allowed values: `native`, `autoreg`
- * `allow_ask_discount` (_optional_) Allow users to ask discount for this account
- * `proxy_id` (_optional_) Using proxy id for account checking. See [GET /account/market](#account/market) to get or edit proxy list
+ * `title` `Optional` Russian title of account. If `title` specified and `title_en` is empty, `title_en` will be automatically translated to English language.
+ * `title_en` `Optional` English title of account. If `title_en` specified and `title` is empty, `title` will be automatically translated to Russian language.
+ * `price` `Optional` Account price in your currency. Allowed values: `cny` `usd` `rub` `eur` `uah` `kzt` `byn` `gbp`
+ * `item_origin` `Optional` Item origin
+ * `description` `Optional` Account public description
+ * `information` `Optional` Account private information (visible for buyer only if purchased)
+ * `has_email_login_data` `Optional` Set boolean, if you have email login data
+ * `email_login_data` `Optional` Email login data (login:pass format) 
+ * `email_type` `Optional` Email type. Allowed values: `native`, `autoreg`
+ * `allow_ask_discount` `Optional` Allow users to ask discount for this account
+ * `proxy_id` `Optional` Using proxy id for account checking. See [GET /account/market](#account/market) to get or edit proxy list
 > This function edits any details of account.
 
 ## Delete_Item
 ```c#
 response = LolzMarketAPI.Delete_Item(int itemId, string reason);
 ```
-### arguments
-int itemId | itemId to delete
+#### arguments
+`int itemId` | `Required` itemId to delete
 
-string reason | (requred) Delete reason
+`string reason` | `Required` Delete reason
 
 > This function deletes your account from public search. Deletetion type is soft. You can restore account after deletetion if you want.
 
@@ -362,10 +367,10 @@ string reason | (requred) Delete reason
 ```c#
 response = LolzMarketAPI.Add_Tag(int itemId, int tagId);
 ```
-### arguments
-int itemId | itemId to add tag
+#### arguments
+`int itemId` | `Required` itemId to add tag
 
-int tagId | (required) Tag id (Tag list is available via Me())
+`int tagId` | `Required` Tag id (Tag list is available via Me())
 
 > This function adds tag for the account
 
@@ -373,10 +378,10 @@ int tagId | (required) Tag id (Tag list is available via Me())
 ```c#
 response = LolzMarketAPI.Delete_Tag(int itemId, int tagId);
 ```
-### arguments
-int itemId | itemId to delete tag
+#### arguments
+`int itemId` | `Required` itemId to delete tag
 
-int tagId | (required) Tag id (Tag list is available via Me())
+`int tagId` | `Required` Tag id (Tag list is available via Me())
 
 > This function deletes tag for the account
 
@@ -384,8 +389,8 @@ int tagId | (required) Tag id (Tag list is available via Me())
 ```c#
 response = LolzMarketAPI.Bump(int itemId);
 ```
-### arguments
-int itemId | itemId to bump
+#### arguments
+`int itemId` | `Required` itemId to bump
 
 > This function bumps account in the search
 
@@ -393,8 +398,8 @@ int itemId | itemId to bump
 ```c#
 response = LolzMarketAPI.Star(int itemId);
 ```
-### arguments
-int itemId | itemId to star product
+#### arguments
+`int itemId` | `Required` itemId to star product
 
 > This function adds account to favourites
 
@@ -402,8 +407,8 @@ int itemId | itemId to star product
 ```c#
 response = LolzMarketAPI.Unstar(int itemId);
 ```
-### arguments
-int itemId | itemId to unstar product
+#### arguments
+`int itemId` | `Required` itemId to unstar product
 
 > This function removes account from favourites
 
@@ -411,8 +416,8 @@ int itemId | itemId to unstar product
 ```c#
 response = LolzMarketAPI.Stick(int itemId);
 ```
-### arguments
-int itemId | itemId to stick product
+#### arguments
+`int itemId` | `Required` itemId to stick product
 
 > This function stick account in the top of search
 
@@ -420,10 +425,17 @@ int itemId | itemId to stick product
 ```c#
 response = LolzMarketAPI.Unstick(int itemId);
 ```
-### arguments
-int itemId | itemId to unstick product
+#### arguments
+`int itemId` | `Required` itemId to unstick product
 
 > This function unstick account of the top of search
+
+## Change_Owner
+```c#
+response = LolzMarketAPI.Change_Owner(int itemId, string username, string secret_answer);
+```
+
+> This function changes account owner by username
 
 # Market profile settings
 ## Me
@@ -436,16 +448,16 @@ response = LolzMarketAPI.Me();
 ```c#
 response = LolzMarketAPI.Change_Settings(**args);
 ```
-### arguments
-bool? disable_steam_guard | (optional) (Boolean) Disable Steam Guard on account purchase moment
+#### arguments
+`bool? disable_steam_guard` | `Optional` Disable Steam Guard on account purchase moment
 
-bool? user_allow_ask_discount | (optional) (Boolean) Allow users ask discount for your accounts
+`bool? user_allow_ask_discount` | `Optional` Allow users ask discount for your accounts
 
-uint? max_discount_percent | (optional) (UInt) Maximum discount percents for your accounts
+`uint? max_discount_percent` | `Optional` Maximum discount percents for your accounts
 
-string allow_accept_accounts | (optional) (String) Usernames who can transfer market accounts to you. Separate values with a comma.
+`string allow_accept_accounts` | `Optional` Usernames who can transfer market accounts to you. Separate values with a comma.
 
-bool? hide_favourites | (optional) (Boolean) Hide your profile info when you add an account to favorites
+`bool? hide_favourites` | `Optional` Hide your profile info when you add an account to favorites
 
 > This function change settings about your profile on the market
 
@@ -460,17 +472,17 @@ response = LolzMarketAPI.Get_Proxy();
 ```c#
 response = LolzMarketAPI.Add_Proxy(string proxyIp, int proxyPort, **args);
 ```
-### arguments
-string proxyIp | (required) Proxy ip or host
+#### arguments
+`string proxyIp` | `Required` Proxy ip or host
 
-int proxyPort | (required) Proxy port
+`int proxyPort` | `Required` Proxy port
 
-string proxyUser | (optional) Proxy username
+`string proxyUser` | `Optional` Proxy username
 
-string proxyPass | (optional) Proxy password
+`string proxyPass` | `Optional` Proxy password
 
 _____
-string proxyRow | (required) Proxy list in String format ip:port:user:pass. Each proxy must be start with new line (use \r\n separator)
+`string proxyRow` | `Required` Proxy list in String format ip:port:user:pass. Each proxy must be start with new line (use \r\n separator)
 
 > This function add single proxy or proxy list
 
@@ -478,9 +490,9 @@ string proxyRow | (required) Proxy list in String format ip:port:user:pass. Each
 ```c#
 response = LolzMarketAPI.Delete_Proxy(**args);
 ```
-### arguments
-int proxy_id | (optional) Proxy id
+#### arguments
+`int proxy_id` | `Optional` Proxy id
 
-bool? delete_all | (optional) Set boolean if you want to delete all proxy
+`bool? delete_all` | `Optional` Set boolean if you want to delete all proxy
 
 > This function delete single or all proxies
