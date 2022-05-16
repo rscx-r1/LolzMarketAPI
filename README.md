@@ -58,6 +58,7 @@ response = LolzMarketAPI.List(**args);
 
 `bool parse_sticky_items` | `Optional` // If yes, API will return stickied accounts in results
 
+`Dictionary<string, string> optional_args` | `Optional` // An optional category parameters: You can find it using "Inspect code element" in your browser
 
 > This function displays a list of latest accounts if category is not introduced or displays a list of accounts in a specific category according to your parameters with category introduced.
 
@@ -76,6 +77,8 @@ response = LolzMarketAPI.Items(**args);
 
 `bool parse_sticky_items` | `Optional` // If yes, API will return stickied accounts in results
 
+`Dictionary<string, string> optional_args` | `Optional` // An optional category parameters: You can find it using "Inspect code element" in your browser
+
 > This function displays a list of owned accounts
 
 ## Orders
@@ -92,6 +95,8 @@ response = LolzMarketAPI.Orders(**args);
 `string title` | `Optional` // The word or words contained in the account title
 
 `bool parse_sticky_items` | `Optional` // If yes, API will return stickied accounts in results
+
+`Dictionary<string, string> optional_args` | `Optional` // An optional category parameters: You can find it using "Inspect code element" in your browser
 
 > This function displays a list of purchased accounts
 
