@@ -3,3 +3,4 @@ C:\Users\Administrator\source\repos\LolzMarketAPI\bin\Debug\LolzMarketAPI.pdb
 C:\Users\Administrator\source\repos\LolzMarketAPI\obj\Debug\LolzMarketAPI.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\source\repos\LolzMarketAPI\obj\Debug\LolzMarketAPI.dll
 C:\Users\Administrator\source\repos\LolzMarketAPI\obj\Debug\LolzMarketAPI.pdb
+C:\Users\Administrator\source\repos\LolzMarketAPI\obj\Debug\LolzMarketAPI.csproj.AssemblyReference.cache

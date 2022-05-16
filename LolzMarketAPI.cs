@@ -64,7 +64,7 @@ namespace LolzMarketAPI
             return await Get_request(String.Format("{0}market/me", baseUrl));
         }
 
-        public static async Task<string> List(string category = null, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false)
+        public static async Task<string> List(string category = null, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false, Dictionary<string, string> optional_args = null)
         {
             // Displays a list of latest accounts without category parameter
             if (category == null) { return await Get_request(String.Format("{0}market", baseUrl)); }
@@ -74,12 +74,19 @@ namespace LolzMarketAPI
             if (pmax != -1) { query["pmax"] = pmax.ToString(); }
             if (title != null) { query["title"] = title; }
             if (parse_sticky_items) { query["parse_sticky_items"] = parse_sticky_items.ToString(); }
+            if (optional_args != null)
+            {
+                foreach (KeyValuePair<string, string> ex in optional_args)
+                {
+                    query[String.Format("{0}=", ex.Key)] = ex.Value.ToString();
+                }
+            }
             string resultQuery = query.ToString();
             string response = await Get_request(String.Format("{0}market/{1}?{2}", baseUrl, category, resultQuery));
             return response;
         }
 
-        public static async Task<string> Items(int category = -1, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false)
+        public static async Task<string> Items(int category = -1, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false, Dictionary<string, string> optional_args = null)
         {
             // Displays a list of owned accounts
             if (category == -1) { return await Get_request(String.Format("{0}market/user/{1}/items", baseUrl, myUserId)); }
@@ -88,12 +95,19 @@ namespace LolzMarketAPI
             if (pmax != -1) { query["pmax"] = pmax.ToString(); }
             if (title != null) { query["title"] = title; }
             if (parse_sticky_items) { query["parse_sticky_items"] = parse_sticky_items.ToString(); }
+            if (optional_args != null)
+            {
+                foreach (KeyValuePair<string, string> ex in optional_args)
+                {
+                    query[String.Format("{0}=", ex.Key)] = ex.Value.ToString();
+                }
+            }
             string resultQuery = query.ToString();
             string response = await Get_request(String.Format("{0}market/user/{1}/items/?category_id={2}?{3}", baseUrl, myUserId, category, resultQuery));
             return response;
         }
 
-        public static async Task<string> Orders(int category = -1, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false)
+        public static async Task<string> Orders(int category = -1, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false, Dictionary<string, string> optional_args = null)
         {
             // Displays a list of purchased accounts
             if (category == -1) { return await Get_request(String.Format("{0}market/user/{1}/orders", baseUrl, myUserId)); }
@@ -102,6 +116,13 @@ namespace LolzMarketAPI
             if (pmax != -1) { query["pmax"] = pmax.ToString(); }
             if (title != null) { query["title"] = title; }
             if (parse_sticky_items) { query["parse_sticky_items"] = parse_sticky_items.ToString(); }
+            if (optional_args != null)
+            {
+                foreach (KeyValuePair<string, string> ex in optional_args)
+                {
+                    query[String.Format("{0}=", ex.Key)] = ex.Value.ToString();
+                }
+            }
             string resultQuery = query.ToString();
             string response = await Get_request(String.Format("{0}market/user/{1}/orders/?category_id={2}?{3}", baseUrl, myUserId, category, resultQuery));
             return response;
@@ -392,17 +413,16 @@ namespace LolzMarketAPI
             if (login_password != null) { values.Add("login_password", login_password); }
             if (close_item != null) { values.Add("close_item", close_item.ToString()); }
             if (resell_item_id != -1) { values.Add("resell_item_id", resell_item_id.ToString()); }
+            string query = string.Empty;
             if (extra != null) 
             {
-                string query = string.Empty;
                 foreach (KeyValuePair<string, string> ex in extra)
                 {
                     query = query + String.Format("extra[{0}]={1}&", ex.Key, ex.Value);
                 }
-                values.Add("extra", query);
             }
 
-            return await Post_request(String.Format("{0}market/{1}/goods/check", baseUrl, itemId), values);
+            return await Post_request(String.Format("{0}market/{1}/goods/check?{2}", baseUrl, itemId, query), values);
         }
 
         public static async Task<string> Goods_Add(int itemId, int resell_item_id = -1)
