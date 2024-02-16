@@ -15,7 +15,7 @@ namespace LolzMarketAPI
 {
     public static class LolzMarketAPI
     {
-        static string baseUrl = "https://api.lolz.guru/";
+        static string baseUrl = "https://api.lzt.market/";
         private static readonly HttpClient client = new HttpClient();
 
 
@@ -61,13 +61,13 @@ namespace LolzMarketAPI
 
         public static async Task<string> Me()
         {
-            return await Get_request(String.Format("{0}market/me", baseUrl));
+            return await Get_request(String.Format("{0}/me", baseUrl));
         }
 
         public static async Task<string> List(string category = null, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false, Dictionary<string, string> optional_args = null)
         {
             // Displays a list of latest accounts without category parameter
-            if (category == null) { return await Get_request(String.Format("{0}market", baseUrl)); }
+            if (category == null) { return await Get_request(String.Format("{0}", baseUrl)); }
             // Displays a list of accounts in a specific category according to your parameters
             var query = HttpUtility.ParseQueryString(string.Empty);
             if (pmin != -1) { query["pmin"] = pmin.ToString(); }
@@ -82,14 +82,14 @@ namespace LolzMarketAPI
                 }
             }
             string resultQuery = query.ToString();
-            string response = await Get_request(String.Format("{0}market/{1}?{2}", baseUrl, category, resultQuery));
+            string response = await Get_request(String.Format("{0}/{1}?{2}", baseUrl, category, resultQuery));
             return response;
         }
 
         public static async Task<string> Items(int category = -1, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false, Dictionary<string, string> optional_args = null)
         {
             // Displays a list of owned accounts
-            if (category == -1) { return await Get_request(String.Format("{0}market/user/{1}/items", baseUrl, myUserId)); }
+            if (category == -1) { return await Get_request(String.Format("{0}/user/{1}/items", baseUrl, myUserId)); }
             var query = HttpUtility.ParseQueryString(string.Empty);
             if (pmin != -1) { query["pmin"] = pmin.ToString(); }
             if (pmax != -1) { query["pmax"] = pmax.ToString(); }
@@ -103,14 +103,14 @@ namespace LolzMarketAPI
                 }
             }
             string resultQuery = query.ToString();
-            string response = await Get_request(String.Format("{0}market/user/{1}/items/?category_id={2}?{3}", baseUrl, myUserId, category, resultQuery));
+            string response = await Get_request(String.Format("{0}/user/{1}/items/?category_id={2}?{3}", baseUrl, myUserId, category, resultQuery));
             return response;
         }
 
         public static async Task<string> Orders(int category = -1, int pmin = -1, int pmax = -1, string title = null, bool parse_sticky_items = false, Dictionary<string, string> optional_args = null)
         {
             // Displays a list of purchased accounts
-            if (category == -1) { return await Get_request(String.Format("{0}market/user/{1}/orders", baseUrl, myUserId)); }
+            if (category == -1) { return await Get_request(String.Format("{0}/user/{1}/orders", baseUrl, myUserId)); }
             var query = HttpUtility.ParseQueryString(string.Empty);
             if (pmin != -1) { query["pmin"] = pmin.ToString(); }
             if (pmax != -1) { query["pmax"] = pmax.ToString(); }
@@ -124,26 +124,26 @@ namespace LolzMarketAPI
                 }
             }
             string resultQuery = query.ToString();
-            string response = await Get_request(String.Format("{0}market/user/{1}/orders/?category_id={2}?{3}", baseUrl, myUserId, category, resultQuery));
+            string response = await Get_request(String.Format("{0}/user/{1}/orders/?category_id={2}?{3}", baseUrl, myUserId, category, resultQuery));
             return response;
         }
 
         public static async Task<string> Fave()
         {
             // Displays a list of favourites accounts
-            return await Get_request(String.Format("{0}market/fave", baseUrl));
+            return await Get_request(String.Format("{0}/fave", baseUrl));
         }
 
         public static async Task<string> Viewed()
         {
             // Displays a list of viewed accounts
-            return await Get_request(String.Format("{0}market/viewed", baseUrl));
+            return await Get_request(String.Format("{0}/viewed", baseUrl));
         }
 
         public static async Task<string> Item(int itemId)
         {
             // Displays account information
-            return await Get_request(String.Format("{0}market/{1}", baseUrl, itemId));
+            return await Get_request(String.Format("{0}/{1}", baseUrl, itemId));
         }
 
         /*
@@ -156,26 +156,26 @@ namespace LolzMarketAPI
             var query = HttpUtility.ParseQueryString(string.Empty);
             query["price"] = price.ToString();
             string resultQuery = query.ToString();
-            return await Post_request(String.Format("{0}market/{1}/reserve?{2}", baseUrl, itemId, resultQuery));
+            return await Post_request(String.Format("{0}/{1}/reserve?{2}", baseUrl, itemId, resultQuery));
         }
 
         public static async Task<string> Cancel_Reserve(int itemId)
         {
             // Cancels reserve.
-            return await Post_request(String.Format("{0}market/{1}/cancel-reserve", baseUrl, itemId));
+            return await Post_request(String.Format("{0}/{1}/cancel-reserve", baseUrl, itemId));
         }
 
         public static async Task<string> Check_Account(int itemId)
         {
             // Checking account for validity. If the account is invalid, the purchase will be canceled automatically
             // (you don't need to make request POST /market/:itemId/cancel-reserve)
-            return await Post_request(String.Format("{0}market/{1}/check-account", baseUrl, itemId));
+            return await Post_request(String.Format("{0}/{1}/check-account", baseUrl, itemId));
         }
 
         public static async Task<string> Confirm_Buy(int itemId)
         {
             // Confirms buy.
-            return await Post_request(String.Format("{0}market/{1}/confirm-buy", baseUrl, itemId));
+            return await Post_request(String.Format("{0}/{1}/confirm-buy", baseUrl, itemId));
         }
         /* ACCOUNT PURCHASING SECTION ENDS */
 
@@ -213,7 +213,7 @@ namespace LolzMarketAPI
             if (transfer_hold) { values.Add("transfer_hold", transfer_hold.ToString()); }
             if (hold_length_value != -1) { values.Add("hold_length_value", hold_length_value.ToString()); }
             if (hold_length_option != null) { values.Add("hold_length_option", hold_length_option.ToString()); }
-            return await Post_request(String.Format("{0}market/balance/transfer/", baseUrl), values);
+            return await Post_request(String.Format("{0}/balance/transfer/", baseUrl), values);
         }
 
         public static async Task<string> Payments(string type = null, int pmin = -1, int pmax = -1,
@@ -252,7 +252,7 @@ namespace LolzMarketAPI
             if (comment != null) { query["comment"] = comment; }
             if (is_hold != -1) { query["is_hold"] = is_hold.ToString(); }
             string resultQuery = query.ToString();
-            return await Get_request(String.Format("{0}market/user/{1}/payments?{2}", baseUrl, myUserId, resultQuery));
+            return await Get_request(String.Format("{0}/user/{1}/payments?{2}", baseUrl, myUserId, resultQuery));
         }
 
         public static async Task<string> Add_Proxy(string proxyIp = null, int proxyPort = -1, string proxyUser = null, string proxyPass = null, string proxyRow = null)
@@ -264,7 +264,7 @@ namespace LolzMarketAPI
             if (proxyUser != null) { values.Add("proxy_user", proxyUser); }
             if (proxyPass != null) { values.Add("proxy_pass", proxyPass); }
             if (proxyRow != null) { values.Add("proxy_row", proxyRow); }
-            return await Post_request(String.Format("{0}market/proxy", baseUrl), values);
+            return await Post_request(String.Format("{0}/proxy", baseUrl), values);
         }
 
         public static async Task<string> Delete_Proxy(int proxy_id = -1, bool? delete_all = null)
@@ -274,13 +274,13 @@ namespace LolzMarketAPI
             if (proxy_id != -1) { query["proxy_id"] = proxy_id.ToString(); }
             if (delete_all != null) { query["delete_all"] = delete_all.ToString(); }
             string resultQuery = query.ToString();
-            return await Delete_request(String.Format("{0}market/proxy?{1}", baseUrl, resultQuery));
+            return await Delete_request(String.Format("{0}/proxy?{1}", baseUrl, resultQuery));
         }
 
         public static async Task<string> Get_Proxy()
         {
             // Gets your proxy list
-            return await Get_request(String.Format("{0}market/proxy", baseUrl));
+            return await Get_request(String.Format("{0}/proxy", baseUrl));
         }
 
         public static async Task<string> Change_Settings(bool? disable_steam_guard = null, int user_allow_ask_discount = -1,
@@ -294,55 +294,55 @@ namespace LolzMarketAPI
             if (max_discount_percent != null) { values.Add("max_discount_percent", max_discount_percent.ToString()); }
             if (allow_accept_accounts != null) { values.Add("allow_accept_accounts", allow_accept_accounts); }
             if (hide_favourites != null) { values.Add("hide_favourites", hide_favourites.ToString()); }
-            return await Put_request(String.Format("{0}market/me", baseUrl), values);
+            return await Put_request(String.Format("{0}/me", baseUrl), values);
         }
 
         public static async Task<string> Unstick(int itemId)
         {
             // Unstick account of the top of search
-            return await Delete_request(String.Format("{0}market/{1}/stick/", baseUrl, itemId));
+            return await Delete_request(String.Format("{0}/{1}/stick/", baseUrl, itemId));
         }
 
         public static async Task<string> Stick(int itemId)
         {
             // Stick account of the top of search
-            return await Post_request(String.Format("{0}market/{1}/stick/", baseUrl, itemId));
+            return await Post_request(String.Format("{0}/{1}/stick/", baseUrl, itemId));
         }
 
         public static async Task<string> Unstar(int itemId)
         {
             // Deletes account from favourites
-            return await Delete_request(String.Format("{0}market/{1}/star/", baseUrl, itemId));
+            return await Delete_request(String.Format("{0}/{1}/star/", baseUrl, itemId));
         }
 
         public static async Task<string> Star(int itemId)
         {
             // Adds account to the favourites
-            return await Post_request(String.Format("{0}market/{1}/star/", baseUrl, itemId));
+            return await Post_request(String.Format("{0}/{1}/star/", baseUrl, itemId));
         }
 
         public static async Task<string> Bump(int itemId)
         {
             // Bumps account in the search
-            return await Post_request(String.Format("{0}market/{1}/bump/", baseUrl, itemId));
+            return await Post_request(String.Format("{0}/{1}/bump/", baseUrl, itemId));
         }
 
         public static async Task<string> Delete_Tag(int itemId, int tagId)
         {
             // Deletes tag for the account
-            return await Delete_request(String.Format("{0}market/{1}/tag?tag_id={2}", baseUrl, itemId, tagId));
+            return await Delete_request(String.Format("{0}/{1}/tag?tag_id={2}", baseUrl, itemId, tagId));
         }
 
         public static async Task<string> Add_Tag(int itemId, int tagId)
         {
             // Adds tag for the account
-            return await Post_request(String.Format("{0}market/{1}/tag?tag_id={2}", baseUrl, itemId, tagId));
+            return await Post_request(String.Format("{0}/{1}/tag?tag_id={2}", baseUrl, itemId, tagId));
         }
 
         public static async Task<string> Delete_Item(int itemId, string reason)
         {
             // Deletes your account from public search. Deletion type is soft. You can restore account after deletion if you want.
-            return await Delete_request(String.Format("{0}market/{1}?reason={2}", baseUrl, itemId, reason));
+            return await Delete_request(String.Format("{0}/{1}?reason={2}", baseUrl, itemId, reason));
         }
 
         public static async Task<string> Edit_Item(int itemId, string key = null, string value = null,
@@ -374,7 +374,7 @@ namespace LolzMarketAPI
                     query = query + String.Format("key_values[{0}]={1}&", ex.Key, ex.Value);
                 }
             }
-            return await Put_request(String.Format("{0}market/{1}/edit?{2}", baseUrl, itemId, query), values);
+            return await Put_request(String.Format("{0}/{1}/edit?{2}", baseUrl, itemId, query), values);
         }
 
         public static async Task<string> Add_Item(string title, int price, int category_id, string item_origin,
@@ -401,7 +401,7 @@ namespace LolzMarketAPI
             if (email_type != null) { values.Add("email_type", email_type); }
             if (allow_ask_discount != null) { values.Add("allow_ask_discount", allow_ask_discount.ToString()); }
             if (proxy_id != -1) { values.Add("proxy_id", proxy_id.ToString()); }
-            return await Post_request(String.Format("{0}market/item/add/", baseUrl), values);
+            return await Post_request(String.Format("{0}/item/add/", baseUrl), values);
         }
 
         public static async Task<string> Goods_Check(int itemId, string login = null, string password = null, string login_password = null,
@@ -422,7 +422,7 @@ namespace LolzMarketAPI
                 }
             }
 
-            return await Post_request(String.Format("{0}market/{1}/goods/check?{2}", baseUrl, itemId, query), values);
+            return await Post_request(String.Format("{0}/{1}/goods/check?{2}", baseUrl, itemId, query), values);
         }
 
         public static async Task<string> Goods_Add(int itemId, int resell_item_id = -1)
@@ -431,7 +431,7 @@ namespace LolzMarketAPI
             var query = HttpUtility.ParseQueryString(string.Empty);
             if (resell_item_id != -1) { query["resell_item_id"] = resell_item_id.ToString(); }
             string resultQuery = query.ToString();
-            return await Get_request(String.Format("{0}market/{1}/goods/add?{2}", baseUrl, itemId, resultQuery));
+            return await Get_request(String.Format("{0}/{1}/goods/add?{2}", baseUrl, itemId, resultQuery));
         }
 
         public static async Task<string> Category(bool? top_queries = null)
@@ -440,19 +440,19 @@ namespace LolzMarketAPI
             var query = HttpUtility.ParseQueryString(string.Empty);
             if (top_queries != null) { query["top_queries"] = top_queries.ToString(); }
             string resultQuery = query.ToString();
-            return await Get_request(String.Format("{0}market/category?{1}", baseUrl, resultQuery));
+            return await Get_request(String.Format("{0}/category?{1}", baseUrl, resultQuery));
         }
 
         public static async Task<string> Email_Code(int itemId, string email)
         {
             // Gets confirmation code or link.
-            return await Get_request(String.Format("{0}market/{1}/email-code?email={2}", baseUrl, itemId, email));
+            return await Get_request(String.Format("{0}/{1}/email-code?email={2}", baseUrl, itemId, email));
         }
 
         public static async Task<string> Refuse_Guarantee(int itemId)
         {
             // Cancel guarantee of account. It can be useful for account reselling.
-            return await Post_request(String.Format("{0}market/{1}/refuse-guarantee", baseUrl, itemId));
+            return await Post_request(String.Format("{0}/{1}/refuse-guarantee", baseUrl, itemId));
         }
 
         public static async Task<string> Change_Password(int itemId, bool? _cancel = null)
@@ -460,7 +460,7 @@ namespace LolzMarketAPI
             // Changes password of account.
             var values = new Dictionary<string, string> { };
             if (_cancel != null) { values.Add("_cancel", _cancel.ToString()); }
-            return await Post_request(String.Format("{0}market/{1}/change-password", baseUrl, itemId), values);
+            return await Post_request(String.Format("{0}/{1}/change-password", baseUrl, itemId), values);
         }
 
         public static async Task<string> Change_Owner(int itemId, string username, string secret_answer)
@@ -469,7 +469,7 @@ namespace LolzMarketAPI
             var values = new Dictionary<string, string> { };
             values.Add("secret_answer", secret_answer);
             values.Add("username", username);
-            return await Post_request(String.Format("{0}market/{1}/change-owner", baseUrl, itemId), values);
+            return await Post_request(String.Format("{0}/{1}/change-owner", baseUrl, itemId), values);
         }
     }
 }

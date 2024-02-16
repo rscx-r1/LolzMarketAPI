@@ -1,0 +1,6 @@
+C:\Users\root\Desktop\projects\LolzMarketAPI\bin\Release\LolzMarketAPI.dll
+C:\Users\root\Desktop\projects\LolzMarketAPI\bin\Release\LolzMarketAPI.pdb
+C:\Users\root\Desktop\projects\LolzMarketAPI\obj\Release\LolzMarketAPI.csproj.AssemblyReference.cache
+C:\Users\root\Desktop\projects\LolzMarketAPI\obj\Release\LolzMarketAPI.csproj.CoreCompileInputs.cache
+C:\Users\root\Desktop\projects\LolzMarketAPI\obj\Release\LolzMarketAPI.dll
+C:\Users\root\Desktop\projects\LolzMarketAPI\obj\Release\LolzMarketAPI.pdb
